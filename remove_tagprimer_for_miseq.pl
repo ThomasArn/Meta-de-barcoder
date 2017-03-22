@@ -38,8 +38,6 @@ while (<$tags>){
 	open ( my $fh1,">>","/$ARGV[1].pair1.fastq")  || die $!;
     open ( my $fh2,">>","/$ARGV[1].pair2.fastq")  || die $!;
 
-#print Dumper(\%handles);
-#print join(", ", @filehandles);
 
 ## Go through fastq file and take up only if they have the correct primer/barcode in pair1 and pair2 
 
@@ -54,7 +52,6 @@ while (<STDIN>){
 
 	elsif($i==2) {
 		chomp;
-		#if ($_ =~ /CGCTCTCTCCTCCGCTTATTGATATGC/) 
 		my ($name1,$name2) = split(/\|/, $name);
 		my ($seq1,$seq2) = split(/\|/, $_);
 
@@ -72,14 +69,12 @@ while (<STDIN>){
 				$b2 = $bar_names[$index].2;
 				print( $fh1  "$name1\_\;barcodelabel\=$bar_names[$index]\;\n$seq1\n") ;
 				print( $fh2  "$name2\_\;barcodelabel\=$bar_names[$index]\;\n$seq2\n") ;
-    		#	print "$bar_names[$index]_2" ."/n";
     			
     			$order = "YES";
     			}
     	last; # quit the loop early, which is why I didn't use "map" here
 		
 		}
-		# else {print "$name".'_NoBarcode'. "\n" . "$_\n"  }
 		$i++;
 		next;
 	}
